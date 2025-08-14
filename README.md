@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/upy-descr.png" alt="UPY descr" width="1200" height="350"/>
+</p>
+
 # UPY – Your Web Application Status Monitor
 _Is your app available? UPY will let you know!_
 
