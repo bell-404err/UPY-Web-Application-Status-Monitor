@@ -1,0 +1,7 @@
+journal
+testData
+
+.idea
+node_modules
+
+.env

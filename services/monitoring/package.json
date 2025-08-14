@@ -1,0 +1,26 @@
+{
+  "name": "monitoring",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx watch src/index.ts",
+    "format": "biome format --write"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.8.0",
+    "@tsconfig/node20": "^20.1.6",
+    "dotenv": "^17.2.1",
+    "mongoose": "^8.17.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.4",
+    "@types/node": "^24.1.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

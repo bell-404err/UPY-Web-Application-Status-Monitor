@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+    "noImplicitAny": false,
+    "outDir": "./dist",
+    "rootDir": "./"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["dist"]
+}

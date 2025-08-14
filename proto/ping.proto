@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ping;
+
+service PingService {
+    rpc CheckIsResourceAlive (CheckRequest) returns (CheckResponse);
+}
+
+message CheckRequest {
+    string url = 1;
+}
+
+message CheckResponse {
+    string status = 1;
+}
