@@ -1,7 +1,7 @@
 // import monitorTasks from "../../../testData.js";
 import { Monitoring } from "../../db/db.js";
 import { Task } from "./Scheduler.types.js"
-import Worker  from "../workerPool/Worker.js"
+import Worker from "../Worker/Worker.js"
 
 class Scheduler {
 
@@ -15,14 +15,14 @@ class Scheduler {
 
   async process(): Promise<void> {
     await this.syncWithDB();
-    setInterval( () => this.dueTask(), 1000 )
-    setInterval( () => this.syncWithDB(), 30000 )
+    setInterval(() => this.dueTask(), 1000)
+    setInterval(() => this.syncWithDB(), 30000)
   }
 
   async syncWithDB(): Promise<Task[]> {
 
     try {
-      const dbTasks: Task[] = await Monitoring.aggregate( [
+      const dbTasks: Task[] = await Monitoring.aggregate([
         { $unwind: "$urls" },
         { $match: { "urls.isActive": true } },
         {
@@ -34,19 +34,19 @@ class Scheduler {
             isActive: "$urls.isActive"
           }
         }
-      ] )
+      ])
 
-      this.tasks = this.tasks.filter( task =>
-        dbTasks.some( (dbTask: Task) => {
+      this.tasks = this.tasks.filter(task =>
+        dbTasks.some((dbTask: Task) => {
           return dbTask.userId === task.userId && dbTask.url === task.url;
-        } )
+        })
       )
 
       for (const task of dbTasks) {
-        const existingTask: Task | undefined = this.tasks.find( item => item.userId === task.userId && item.url === task.url );
+        const existingTask: Task | undefined = this.tasks.find(item => item.userId === task.userId && item.url === task.url);
 
         if (!existingTask) {
-          this.tasks.push( { ...task, nextCheckAt: Date.now() + task.interval * 1000 } )
+          this.tasks.push({ ...task, nextCheckAt: Date.now() + task.interval * 1000 })
 
         } else {
           if (existingTask.interval !== task.interval) {
@@ -67,7 +67,7 @@ class Scheduler {
 
     const presentTime = Date.now();
 
-    const dueTasks: Task[] = this.tasks.filter( (task: Task) => {
+    const dueTasks: Task[] = this.tasks.filter((task: Task) => {
       return task.nextCheckAt <= presentTime;
     })
 
@@ -77,7 +77,7 @@ class Scheduler {
       task.nextCheckAt = presentTime + task.interval * 1000;
     }
 
-    await this.worker.process(dueTasks);
+    await this.worker.startQueue(dueTasks);
 
   }
 }

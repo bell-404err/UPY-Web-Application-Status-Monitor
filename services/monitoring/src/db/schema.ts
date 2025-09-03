@@ -6,19 +6,20 @@ const monitoringSchema = new Schema( {
     userId: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
-    urls: [
-      {
-        url: { type: String, required: true },
-        interval: { type: Number, required: true },
-        isActive: { type: Boolean, default: false },
-      }
-    ]
+    urls: {
+      type: [
+        {
+          url: { type: String, required: true },
+          interval: { type: Number, required: true },
+          isActive: { type: Boolean, default: false },
+        },
+      ],
+      default: []
+    },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true }
 )
 
 export default monitoringSchema;
