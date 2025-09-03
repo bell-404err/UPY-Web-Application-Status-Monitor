@@ -1,12 +1,13 @@
-import * as grpc from "@grpc/grpc-js"
+import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader"
 import path from "path";
+
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PROTO_PATH: string = path.resolve(__dirname, "../../../proto/ping.proto");
+const PROTO_PATH: string = path.resolve(__dirname, "../../../../proto/ping.proto");
 
 const packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
@@ -16,4 +17,4 @@ const packageDefinition = protoLoader.loadSync(
     }
 );
 
-export const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
+export const pingProtoDescriptor = grpc.loadPackageDefinition(packageDefinition);

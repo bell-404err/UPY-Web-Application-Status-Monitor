@@ -1,16 +1,16 @@
-// import {Monitoring} from "./db/db.js"
-//
-// async function test() {
-//     return await Monitoring.create({
-//         userId: 'user123',
-//         urls: [
-//             {
-//                 url: 'https://example.com',
-//                 interval: 60,
-//                 isActive: true
-//             }
-//         ]
-//     });
-// }
-//
-// console.log(test());
+import MonitoringService from './MonitoringService.js';
+
+const testResource = {
+  userId: "1333",
+  urlData: {
+      url: "http://192.168.0.100/",
+      interval: 60,
+      isActive: true,
+  }
+}
+
+const monitor = new MonitoringService();
+
+const res = await monitor.addResource(testResource);
+console.log(res)
+

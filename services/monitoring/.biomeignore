@@ -1,9 +1,0 @@
-node_modules
-dist
-build
-coverage
-.cache
-.turbo
-.next
-tmp
-.git

@@ -8,7 +8,3 @@ const __dirname = path.dirname(__filename);
 
 
 const server = new grpc.Server();
-
-// server.addService(protoDescriptor.ping.PingService.service, {
-//     // CheckIsResourceAlive: checkIsResourceAlive
-// })
