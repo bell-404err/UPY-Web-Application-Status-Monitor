@@ -1,13 +1,13 @@
 import express from 'express';
-import GrpcClients from '../grpcClient/grpcClients.js'
+// import GrpcClients from './grpc/grpcClients.js'
 
 const app = express()
-
 
 const port = 3000
 const pingClient = new GrpcClients;
 
 app.use(express.json());
+
 app.get('/api', async (req, res) => {
     const url: string = "https://jsonplaceholder.typicode.com/todos/1";
     if (url) {
